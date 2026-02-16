@@ -142,8 +142,8 @@ msgstr ""
 #. type: Plain text
 #: ../README.md:8
 msgid ""
-"Translations: [日本語 (Japanese)](https://gemmaro.github.io/purescript-book/)"
-msgstr "翻訳：[日本語（本訳）](https://gemmaro.github.io/purescript-book/)"
+"Translations: [日本語 (Japanese)](https://purs-jp.github.io/purescript-book/)"
+msgstr "翻訳：[日本語（本訳）](https://purs-jp.github.io/purescript-book/)"
 
 #. type: Title ##
 #: ../README.md:9

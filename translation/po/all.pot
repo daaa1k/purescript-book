@@ -142,7 +142,7 @@ msgstr ""
 #. type: Plain text
 #: ../README.md:8
 #, markdown-text
-msgid "Translations: [日本語 (Japanese)](https://gemmaro.github.io/purescript-book/)"
+msgid "Translations: [日本語 (Japanese)](https://purs-jp.github.io/purescript-book/)"
 msgstr ""
 
 #. type: Title ##
