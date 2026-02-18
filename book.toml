@@ -1,7 +1,6 @@
 [book]
 authors = ["Phil Freeman"]
 language = "ja"
-multilingual = false
 src = "text-ja"
 title = "実例によるPureScript"
 
