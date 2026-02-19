@@ -5,5 +5,5 @@ src = "text-ja"
 title = "実例によるPureScript"
 
 [output.html]
-git-repository-url = "https://github.com/gemmaro/purescript-book"
+git-repository-url = "https://github.com/purs-jp/purescript-book"
 mathjax-support = true
