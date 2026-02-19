@@ -38,9 +38,16 @@ jobs:
         run: |
           version=$(purs --version)
           today=$(date -I)
-          echo -e "\n\n## Release\n" >> ./text-ja/index.md
-          echo -e "PureScript v$version\n" >> ./text-ja/index.md
-          echo -e "Published on $today" >> ./text-ja/index.md
+          python3 -c "
+version = '$version'
+today = '$today'
+with open('./text-ja/index.md', 'r') as f:
+    content = f.read()
+release = '\n## Release\n\nPureScript v' + version + '\n\nPublished on ' + today + '\n\n'
+content = content.replace('<small>', release + '<small>', 1)
+with open('./text-ja/index.md', 'w') as f:
+    f.write(content)
+"
 
       - name: Setup Pages
         id: pages
