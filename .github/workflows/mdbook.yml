@@ -3,22 +3,32 @@ name: Build Book
 on:
   push:
     branches: [ja]
-    # branches: [master]
   pull_request:
 
+  workflow_dispatch:
+
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    env:
+      MDBOOK_VERSION: 0.4.36
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v2
-        with:
-          mdbook-version: 'latest'
+      - name: Install mdBook
+        run: |
+          curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
+          rustup update
+          cargo install --version ${MDBOOK_VERSION} mdbook
 
       - name: Set up PureScript toolchain
         uses: purescript-contrib/setup-purescript@main
@@ -31,13 +41,26 @@ jobs:
           echo -e "PureScript v$version\n" >> README.md
           echo -e "Published on $today" >> README.md
 
-      - run: mdbook build
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/ja'
-        # if: github.ref == 'refs/heads/master'
+      - name: Build with mdBook
+        run: mdbook build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./book
-          # cname: book.purescript.org
+          path: ./book
+
+  deploy:
+    if: github.ref == 'refs/heads/ja'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
