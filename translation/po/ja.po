@@ -14,7 +14,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: com.github.gemmaro.purescript-book.v0.1.0\n"
+"Project-Id-Version: com.github.purs-jp.purescript-book.v0.1.0\n"
 "POT-Creation-Date: 2024-08-05 08:18+0900\n"
 "PO-Revision-Date: 2024-08-05 08:25+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
